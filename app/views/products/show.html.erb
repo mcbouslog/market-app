@@ -10,9 +10,12 @@
       <img class="img-responsive" src="<%=  @product.image %>">
       <h4 class="text-center">Price:  <%= @product.price %>  </h4>
       <h4 class="text-center">Description:  <%= @product.description %>  </h4>
+      <h5 class="text-center"><%=link_to "Edit Product", "/products/#{@product.id}/edit"%></h5>
 
     </div>
 
   </div>
+
+  <h3><%=link_to "Main Page", "/products"%>
 
 </div>
