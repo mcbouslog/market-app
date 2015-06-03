@@ -3,3 +3,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// Class
+
+body {
+  font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+  background-image: url("symphony.png")
+}
+
+img {
+  max-height: 250px;
+  max-width: 250px;
+}
