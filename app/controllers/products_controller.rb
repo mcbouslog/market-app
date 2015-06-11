@@ -25,9 +25,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product = Product.create(name: params[:name], price: params[:price], description: params[:description], image: params[:image])
+    @product = Product.create(name: params[:name], price: params[:price], description: params[:description])
+    
+    Product_Image.create(product_id: @product.id, image_url: params[:image_url_1])
+
     flash[:success] = "Product created"
-    redirect_to "/products/#{product.id}"
+    redirect_to "/products/#{@product.id}"
   end 
 
   def edit
@@ -38,7 +41,7 @@ class ProductsController < ApplicationController
   def update
     product_id = params[:id]
     product = Product.find_by(id: product_id)
-    product.update(name: params[:name], price: params[:price], description: params[:description], image: params[:image])
+    product.update(name: params[:name], price: params[:price], description: params[:description])
     flash[:info] = "Product Edited"
     redirect_to "/products/#{product.id}"
   end

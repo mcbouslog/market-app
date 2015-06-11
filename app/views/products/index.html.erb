@@ -8,7 +8,7 @@
 
     <% @products.each do |product|  %>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
 
       <a href="/products/<%=product.id%>"><h3 class="text-center"><%= product.name %></h3>
       <img class="center-block img-responsive img-rounded" src="<%=  product.product_images.first.image_url %>">

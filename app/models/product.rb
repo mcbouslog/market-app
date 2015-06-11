@@ -1,11 +1,12 @@
 class Product < ActiveRecord::Base
   belongs_to :supplier
   has_many :product_images
+  has_many :orders
 
   SALES_TAX = 0.09
 
   def friendly_updated_at
-    updated_at.strftime("%B, %d, %y")
+    updated_at.strftime("%b %d, %Y")
   end
 
   def sales_message
