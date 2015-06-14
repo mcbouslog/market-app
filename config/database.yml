@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
-  database: market-app_production
-  username: market-app
-  password: <%= ENV['MARKET-APP_DATABASE_PASSWORD'] %>
+  database: marketapp-production
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+     %>

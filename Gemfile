@@ -5,6 +5,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'mysql2'
+
+gem 'pg', group: :production
+
+gem 'rails_12factor', group: :production
+
 # Use SCSS for stylesheets
 gem 'seed_dump'
 

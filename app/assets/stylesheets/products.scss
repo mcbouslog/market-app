@@ -4,13 +4,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // Class
+.bgimage {
+background-image: url(garage_colors.jpg);
+background-size: 100%;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+// .bgimage-inside {
+// padding-top: 37.36%;
+// }
 
 body {
   font-family: Consolas,monaco,monospace;
-  color: darkorange;
-  background-image: url("military-camo-wallpaper.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  color: orange;
   padding-top: 70px;
 }
 
