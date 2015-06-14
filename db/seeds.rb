@@ -1,6 +1,3 @@
-User.create!([
-  {email: "mark@gmail.com", encrypted_password: "$2a$10$.7bBTD9cdWdOxJwHHV0wu.G..AAGQF.m0mgv7fks2WhS6YjHbttb6", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2015-06-10 01:51:29", sign_in_count: 5, current_sign_in_at: "2015-06-12 00:34:17", last_sign_in_at: "2015-06-11 01:20:41", current_sign_in_ip: "::1", last_sign_in_ip: "::1"}
-])
 Order.create!([
   {quantity: 2, product_id: 6, user_id: 1, total_price: "19.6", tax: "1.62", subtotal: "17.98"},
   {quantity: 10, product_id: 9, user_id: 1, total_price: "92.5", tax: "7.6", subtotal: "84.9"},
