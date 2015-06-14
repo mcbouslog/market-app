@@ -7,7 +7,7 @@
     <div class="col-md-8 coloffset-md-4">
 
       <h3 class="text-center"><%= @product.name %></h3>
-      
+
       <% @product.product_images.each do |product_image| %>
       <img class="img-responsive center-block" src="<%= product_image.image_url %>">
       <% end %>
@@ -18,8 +18,10 @@
       <h4 class="text-center">Total:  <%= number_to_currency(@product.total) %>  </h4>
       <h4 class="text-center">Description:  <%= @product.description %>  </h4>
       <h4 class="text-center">Brought To You By:  <%= @product.supplier.name if @product.supplier.name != "" %>  </h4>
-      
-      
+      <h4 class="text-center">Categories:  <% @product.categories.each do |category| %>
+        <%= category.name %>
+        <% end %>
+      </h4>
       <h2>
       <%= form_tag "/orders/#{@product.id}", method: :post do %>
         <div>
