@@ -17,7 +17,7 @@
       <h4 class="text-center">Sales Tax:  <%= number_to_currency(@product.sales_tax) %>  </h4>
       <h4 class="text-center">Total:  <%= number_to_currency(@product.total) %>  </h4>
       <h4 class="text-center">Description:  <%= @product.description %>  </h4>
-      <h4 class="text-center">Brought To You By:  <%= @product.supplier.name %>  </h4>
+      <h4 class="text-center">Brought To You By:  <%= @product.supplier.name if @product.supplier.name != "" %>  </h4>
       
       
       <h2>
