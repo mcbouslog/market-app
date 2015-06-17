@@ -1,13 +1,9 @@
-class Order < ActiveRecord::Base
-  belongs_to :product
+class CartedProduct < ActiveRecord::Base
   belongs_to :user
-  has_many :carted_products
+  belongs_to :product
+  belongs_to :order
 
   SALES_TAX = 0.09
-
-  def friendly_created_at
-    created_at.strftime("%b %d, %Y")
-  end
 
   def calc_subtotal(price)
     quantity * price

@@ -22,14 +22,16 @@
         <%= category.name %>
         <% end %>
       </h4>
+      
       <h2>
-      <%= form_tag "/orders/#{@product.id}", method: :post do %>
+      <%= form_tag "/carted_products", method: :post do %>
         <div>
           <%= label_tag :quantity %>
           <%= text_field_tag :quantity %>
+          <%= hidden_field_tag :product_id, @product.id %>
         </div>
         <div>
-        <%= submit_tag "Buy Now!" %>
+        <%= submit_tag "Add to Cart" %>
         </div>
       <% end %>
       </h2>

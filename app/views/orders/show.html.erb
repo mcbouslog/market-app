@@ -5,12 +5,16 @@
   <h1>Order Confirmation:</h1>
 
   <h3>Order ID:  <%= @order.id %></h3>
-  <h3>Quantity:  <%= @order.quantity %></h3>
-  <h3>Product ID:  <%= @order.product_id %></h3>
+  
+  <% @ordered_products.each do |ordered_product| %>
+    <h4 class="text-center"><%= ordered_product.product.name %> (<%=ordered_product.quantity %>)</h4>
+
+  <% end %> 
+
   <h3>Subtotal:  <%= number_to_currency(@order.subtotal) %></h3>
   <h3>Sales Tax:  <%= number_to_currency(@order.tax) %></h3>
   <h3>Total Price:  <%= number_to_currency(@order.total_price) %></h3>
   <h3>Order Created On:  <%= @order.friendly_created_at %></h3>
-  <h3>Email:  <%= @user.email %></h3>
+  <h3>Email:  <%= current_user.email %></h3>
 
 </div>
