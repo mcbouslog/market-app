@@ -2,7 +2,7 @@ class CartedProductsController < ApplicationController
 
   def index
     if !current_user.carted_products.where(status: "carted").empty?
-      @carted_products = CartedProduct.where("user_id = ? AND status = ?", current_user.id, "carted")
+      @carted_products = current_user.carted_products.where(status: "carted")
     elsif current_user
       redirect_to "/products"
     else
