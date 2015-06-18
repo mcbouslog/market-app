@@ -5,16 +5,8 @@ class CartedProduct < ActiveRecord::Base
 
   SALES_TAX = 0.09
 
-  def calc_subtotal(price)
-    quantity * price
-  end
-
-  def calc_tax(price)
-    quantity * price * SALES_TAX
-  end
-
-  def calc_total(price)
-    quantity * price * (SALES_TAX + 1)
+  def calc_subtotal
+    quantity * product.price
   end
 
 end

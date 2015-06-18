@@ -9,16 +9,15 @@ class Order < ActiveRecord::Base
     created_at.strftime("%b %d, %Y")
   end
 
-  def calc_subtotal(price)
-    quantity * price
-  end
+  def calculate_totals
+    subtotal = 0
+    carted_products.each do |carted_product|
+      subtotal += carted_product.calc_subtotal
+    end
 
-  def calc_tax(price)
-    quantity * price * SALES_TAX
-  end
-
-  def calc_total(price)
-    quantity * price * (SALES_TAX + 1)
+    tax = subtotal * SALES_TAX
+    total_price = subtotal + tax
+    update(subtotal: subtotal, tax: tax, total_price: total_price)
   end
 
 end

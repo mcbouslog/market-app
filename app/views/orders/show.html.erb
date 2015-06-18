@@ -6,8 +6,8 @@
 
   <h3>Order ID:  <%= @order.id %></h3>
   
-  <% @order.carted_products.each do |ordered_product| %>
-    <h4 class="text-center"><%= ordered_product.product.name %> (<%=ordered_product.quantity %>)</h4>
+  <% @order.carted_products.each do |carted_product| %>
+    <h4 class="text-center"><%= carted_product.product.name %> (<%=carted_product.quantity %>)</h4>
 
   <% end %> 
 
