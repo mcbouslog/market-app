@@ -1,9 +1,10 @@
 class CartedProductsController < ApplicationController
 
   def index
-    if !current_user.carted_products.where(status: "carted").empty?
+    if current_user.carted_products.where(status: "carted").any?
       @carted_products = current_user.carted_products.where(status: "carted")
     elsif current_user
+      flash[:warning] = "Not Items in Shopping Cart"
       redirect_to "/products"
     else
       redirect_to "/users/sign_up"

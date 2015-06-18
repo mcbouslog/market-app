@@ -3,8 +3,6 @@ class OrdersController < ApplicationController
   def create
     if current_user
       
-      order = Order.create(user_id: current_user.id)
-
       @ordered_products = current_user.carted_products.where(status: "carted")
       
       @order_subtotal = 0
@@ -20,10 +18,11 @@ class OrdersController < ApplicationController
         @order_tax += ordered_product.calc_tax(price)
         @order_total_price += ordered_product.calc_total(price)
 
-        ordered_product.update(status: "purchased", order_id: order.id)
       end
       
-      order.update(subtotal: @order_subtotal, tax: @order_tax, total_price: @order_total_price)
+      order = Order.create(user_id: current_user.id, subtotal: @order_subtotal, tax: @order_tax, total_price: @order_total_price)
+
+      @ordered_products.update_all(status: "purchased", order_id: order.id)
 
       redirect_to "/orders/#{order.id}"
     else
@@ -33,7 +32,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
-    @ordered_products = current_user.carted_products.where(order_id: @order.id)
   end
 
 end

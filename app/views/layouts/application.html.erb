@@ -55,7 +55,7 @@
       </form>-->
       <ul class="nav navbar-nav navbar-right">
         
-        <li> <%= link_to "Check-Out", "/carted_products" %>
+        <li class="glyphicon glyphicon-shopping-cart"> <%= link_to "Check-Out", "/carted_products" %> </li>
  
         <li> <%= link_to "Sign-Out", "/users/sign_out", method: :delete if current_user %> </li>
         <li> <%= link_to "Sign-In", "/users/sign_in" unless current_user %> </li>

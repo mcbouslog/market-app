@@ -6,7 +6,7 @@
 
   <h3>Order ID:  <%= @order.id %></h3>
   
-  <% @ordered_products.each do |ordered_product| %>
+  <% @order.carted_products.each do |ordered_product| %>
     <h4 class="text-center"><%= ordered_product.product.name %> (<%=ordered_product.quantity %>)</h4>
 
   <% end %> 
@@ -16,5 +16,7 @@
   <h3>Total Price:  <%= number_to_currency(@order.total_price) %></h3>
   <h3>Order Created On:  <%= @order.friendly_created_at %></h3>
   <h3>Email:  <%= current_user.email %></h3>
+
+  <h3><%=link_to "Main Page", "/products"%></h3>
 
 </div>
