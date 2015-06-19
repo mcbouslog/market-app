@@ -1,19 +1,23 @@
 class CartedProductsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     if current_user.carted_products.where(status: "carted").any?
       @carted_products = current_user.carted_products.where(status: "carted")
-    elsif current_user
+    else current_user
       flash[:warning] = "Not Items in Shopping Cart"
-      redirect_to "/products"
-    else
-      redirect_to "/users/sign_up"
+      redirect_to "/"
     end
   end
 
   def create
-    CartedProduct.create(user_id: current_user.id, product_id: params[:product_id], quantity: params[:quantity], status: "carted")
-    redirect_to "/carted_products"
+    @carted_product = CartedProduct.new(user_id: current_user.id, product_id: params[:id], quantity: params[:quantity], status: "carted")
+    @product = Product.find_by(id: params[:product_id])
+    if @carted_product.save 
+      redirect_to "/carted_products"
+    else
+      render "/products/show"
+    end
   end
 
   def destroy

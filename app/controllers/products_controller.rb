@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show, :search]
 
   def index
     @products = Product.all
@@ -25,16 +26,23 @@ class ProductsController < ApplicationController
     end
   end
 
-  def new  
+  def new
+    @product = Product.new
+    @product_image = ProductImage.new
   end
 
   def create
-    @product = Product.create(name: params[:name], price: params[:price], description: params[:description], supplier_id: params[:supplier_id])
+    @product = Product.new(name: params[:name], price: params[:price], description: params[:description], supplier_id: params[:supplier_id])
     
-    ProductImage.create(product_id: @product.id, image_url: params[:image_url_1])
+    @product_image = ProductImage.new(product_id: @product.id, image_url: params[:image_url_1])
 
-    flash[:success] = "Product created"
-    redirect_to "/products/#{@product.id}"
+    if @product.save && @product_image.save
+      flash[:success] = "Product created"
+      redirect_to "/products/#{@product.id}"
+    else
+      render "products/new"    
+    end
+
   end 
 
   def edit
@@ -55,13 +63,19 @@ class ProductsController < ApplicationController
     product = Product.find_by(id: product_id)
     product.destroy
     flash[:danger] = "Product deleted"
-    redirect_to "/products"
+    redirect_to "/"
   end
 
   def search
     search_term = params[:search]
     @products = Product.where("name LIKE ?", "%#{search_term}%")
     render :index
+  end
+
+  def authenticate_admin!
+    unless user_signed_in? && current_user.admin
+      redirect_to "/"
+    end
   end
 
 end

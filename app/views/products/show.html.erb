@@ -1,5 +1,17 @@
 <div class="container">
 
+  <% if @carted_product && @carted_product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@carted_product.errors.count, "error") %> prohibited this product from being saved:</h2>
+   
+      <ul>
+      <% @carted_product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <h1>Here's what you've asked for:</h1>
 
   <div class="row">
@@ -7,7 +19,7 @@
     <div class="col-md-8 coloffset-md-4">
 
       <h3 class="text-center"><%= @product.name %></h3>
-
+      
       <% @product.product_images.each do |product_image| %>
       <img class="img-responsive center-block" src="<%= product_image.image_url %>">
       <% end %>
@@ -23,22 +35,25 @@
         <% end %>
       </h4>
       
-      <h2>
-      <%= form_tag "/carted_products", method: :post do %>
-        <div>
-          <%= label_tag :quantity %>
-          <%= text_field_tag :quantity %>
-          <%= hidden_field_tag :product_id, @product.id %>
-        </div>
-        <div>
-        <%= submit_tag "Add to Cart" %>
-        </div>
+      <% if user_signed_in? %>
+        <h2>
+        <%= form_tag "/carted_products", method: :post do %>
+          <div>
+            <%= label_tag :quantity %>
+            <%= text_field_tag :quantity %>
+            <%= hidden_field_tag :product_id, @product.id %>
+          </div>
+          <div>
+          <%= submit_tag "Add to Cart" %>
+          </div>
+        <% end %>
+        </h2>
       <% end %>
-      </h2>
       
-      
-      <h5 class="text-center"><%=link_to "Edit Product", "/products/#{@product.id}/edit"%></h5>
-      <h6 class="text-center"><%=link_to "Delete Product", "/products/#{@product.id}", method: :delete %></h6>
+      <% if user_signed_in? && current_user.admin %>
+        <h5 class="text-center"><%=link_to "Edit Product", "/products/#{@product.id}/edit"%></h5>
+        <h6 class="text-center"><%=link_to "Delete Product", "/products/#{@product.id}", method: :delete %></h6>
+      <% end %>
 
     </div>
 

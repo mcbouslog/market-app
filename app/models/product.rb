@@ -7,6 +7,12 @@ class Product < ActiveRecord::Base
   has_many :carted_products
   has_many :users, through: :carted_products
 
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :price, presence: true
+  validates :price, numericality: true
+  validates :description, presence: true
+
   SALES_TAX = 0.09
 
   def friendly_updated_at
