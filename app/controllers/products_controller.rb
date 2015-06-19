@@ -42,7 +42,6 @@ class ProductsController < ApplicationController
     else
       render "products/new"    
     end
-
   end 
 
   def edit
@@ -52,10 +51,14 @@ class ProductsController < ApplicationController
 
   def update
     product_id = params[:id]
-    product = Product.find_by(id: product_id)
-    product.update(name: params[:name], price: params[:price], description: params[:description])
-    flash[:info] = "Product Edited"
-    redirect_to "/products/#{product.id}"
+    @product = Product.find_by(id: product_id)
+    @product.update(name: params[:name], price: params[:price], description: params[:description])
+    if @product.valid?
+      flash[:info] = "Product Edited"
+      redirect_to "/products/#{@product.id}"
+    else
+      render "products/edit"    
+    end
   end
 
   def destroy
